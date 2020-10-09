@@ -15,7 +15,7 @@ public class BankAccountController {
 
     private BankAccountService bankAccountService;
 
-    public BankAccountController(BankAccountService bankAccountService){
+    public BankAccountController(BankAccountService bankAccountService) {
         this.bankAccountService = bankAccountService;
     }
 
@@ -26,8 +26,8 @@ public class BankAccountController {
     }
 
     @PostMapping
-    public String registerBankAccount(@ModelAttribute BankAccount bankAccount, Model model) {
-        bankAccountService.addBankAccount(bankAccount);
+    public String openBankAccount(@ModelAttribute BankAccount bankAccount, Model model) {
+        bankAccountService.createBankAccount(bankAccount);
         model.addAttribute("allBankAccounts", bankAccountService.getBankAccounts());
         return "redirect:bankaccount";
     }
