@@ -50,7 +50,12 @@ public class BankAccountService {
 
     public void editBankAccount(BankAccount bankAccount) {
         String url = "http://localhost:8081/api/bankaccount/" + bankAccount.getId();
+
         restTemplate.put(url, bankAccount);
     }
 
+    public void deleteBankAccount(int id) {
+        String url = "http://localhost:8081/api/bankaccount/" + id;
+        restTemplate.delete(url, id);
+    }
 }
