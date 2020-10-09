@@ -1,5 +1,6 @@
 package th.ac.ku.atm.controller;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +43,7 @@ public class BankAccountController {
                               Model model) {
 
         bankAccountService.editBankAccount(bankAccount);
-        model.addAttribute("bankaccounts",bankAccountService.getBankAccounts());
+        model.addAttribute("bankaccounts", bankAccountService.getBankAccounts());
         return "redirect:/bankaccount";
     }
 
@@ -53,4 +54,33 @@ public class BankAccountController {
         return "redirect:/bankaccount";
     }
 
+    @GetMapping("/deposit/{id}")
+    public String getDeposit(@PathVariable int id, Model model) {
+        BankAccount account = bankAccountService.getBankAccount(id);
+        model.addAttribute("bankAccount", account);
+        return "bankaccount-deposit";
+    }
+
+    @PostMapping("/deposit/{id}")
+    public String deposit(@PathVariable int id, @ModelAttribute BankAccount tempBankAccount,
+                          Model model) {
+        bankAccountService.deposit(tempBankAccount);
+        model.addAttribute("bankaccounts", bankAccountService.getBankAccounts());
+        return "redirect:/bankaccount";
+    }
+
+    @GetMapping("/withdraw/{id}")
+    public String getWithdraw(@PathVariable int id, Model model) {
+        BankAccount account = bankAccountService.getBankAccount(id);
+        model.addAttribute("bankAccount", account);
+        return "bankaccount-withdraw";
+    }
+
+    @PostMapping("/withdraw/{id}")
+    public String Withdraw(@PathVariable int id, @ModelAttribute BankAccount tempBankAccount,
+                           Model model) {
+        bankAccountService.withdraw(tempBankAccount);
+        model.addAttribute("bankaccounts", bankAccountService.getBankAccounts());
+        return "redirect:/bankaccount";
+    }
 }

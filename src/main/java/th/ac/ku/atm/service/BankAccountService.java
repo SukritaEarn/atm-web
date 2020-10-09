@@ -58,4 +58,18 @@ public class BankAccountService {
         String url = "http://localhost:8081/api/bankaccount/" + id;
         restTemplate.delete(url, id);
     }
+
+    public void deposit(BankAccount bankAccount) {
+        BankAccount transBankAccount = getBankAccount(bankAccount.getId());
+        double depositAmount = bankAccount.getBalance();
+        transBankAccount.depositMoney(depositAmount);
+        editBankAccount(transBankAccount);
+    }
+
+    public void withdraw(BankAccount bankAccount) {
+        BankAccount transBankAccount = getBankAccount(bankAccount.getId());
+        double withdrawAmount = bankAccount.getBalance();
+        transBankAccount.withdrawMoney(withdrawAmount);
+        editBankAccount(transBankAccount);
+    }
 }

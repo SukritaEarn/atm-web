@@ -54,4 +54,12 @@ public class BankAccount {
                 ", balance=" + balance +
                 '}';
     }
+
+    public void depositMoney(double amount) {
+        balance += amount;
+    }
+
+    public void withdrawMoney(double amount) {
+        balance -= amount;
+    }
 }
